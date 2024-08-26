@@ -1,6 +1,8 @@
 package dk.tec.activitypermissions;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +22,11 @@ public class SecondActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //TextView textView = findViewById(R.id.tv_text);
+        Intent intent = getIntent();
+        Mail email = (Mail)intent.getSerializableExtra("mailObject");
+        //textView.setText(str);
+
     }
 }
