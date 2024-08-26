@@ -1,5 +1,8 @@
 package dk.tec.activitypermissions;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.Calendar;
 
@@ -27,6 +32,31 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //SHOW DIALOG BOX WITH INTERNAL CLASS
+        FragmentManager fm = getSupportFragmentManager();
+        new StartGameDialogFragment().show(fm, "Dialog");
+    }
+
+    public static class StartGameDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction.
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Really???")
+                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // START THE GAME!
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancels the dialog.
+                        }
+                    });
+            // Create the AlertDialog object and return it.
+            return builder.create();
+        }
     }
 
     @Override
